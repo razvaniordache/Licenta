@@ -8,7 +8,7 @@ namespace Formular.Models
         public int DefaultQuantity { get; }
         public string UnitOfMeasure { get; set; }
 
-        public Product(string name, int quantity, string unitOfMeasure, int defaultQuantity = 1)
+        public Product(string name, int quantity, string unitOfMeasure, int defaultQuantity = 0)
         {
             this.Name = name;
             this.Quantity = quantity;

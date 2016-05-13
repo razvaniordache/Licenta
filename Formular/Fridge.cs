@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Net;
 using System.IO;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Formular
 {
@@ -72,10 +74,11 @@ namespace Formular
             using (StreamReader sr = new StreamReader(response.GetResponseStream()))
             {
                 string responseJson = sr.ReadToEnd();
-
-                //List<test> myDeserializedObjList = (List<test>)Newtonsoft.Json.JsonConvert.DeserializeObject(Request["jsonString"], typeof(List<string>));
-                return responseJson;
-                // more stuff
+                var serializer = new JsonSerializer();
+                JObject o = JObject.Parse(responseJson);
+                string brand= (string)o["attributes"]["Brand"];
+                string Name = (string)o["name"];
+                return brand + "-" + Name;
             }
   
             

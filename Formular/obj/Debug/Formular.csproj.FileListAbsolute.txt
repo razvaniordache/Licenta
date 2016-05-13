@@ -18,3 +18,15 @@ C:\Users\Iordache Razvan\Documents\Visual Studio 2015\Projects\Formular\Formular
 C:\Users\Iordache Razvan\Documents\Visual Studio 2015\Projects\Formular\Formular\obj\Debug\Formular.Form1.resources
 C:\Users\Iordache Razvan\Documents\Visual Studio 2015\Projects\Formular\Formular\obj\Debug\Formular.Properties.Resources.resources
 C:\Users\Iordache Razvan\Documents\Visual Studio 2015\Projects\Formular\Formular\obj\Debug\Formular.csproj.GenerateResource.Cache
+C:\Users\Iordache Razvan\Documents\Visual Studio 2015\Projects\Licenta\Formular\bin\Debug\Formular.exe.config
+C:\Users\Iordache Razvan\Documents\Visual Studio 2015\Projects\Licenta\Formular\obj\Debug\Formular.exe
+C:\Users\Iordache Razvan\Documents\Visual Studio 2015\Projects\Licenta\Formular\obj\Debug\Formular.pdb
+C:\Users\Iordache Razvan\Documents\Visual Studio 2015\Projects\Licenta\Formular\bin\Debug\BDProduse.accdb
+C:\Users\Iordache Razvan\Documents\Visual Studio 2015\Projects\Licenta\Formular\bin\Debug\Formular.exe
+C:\Users\Iordache Razvan\Documents\Visual Studio 2015\Projects\Licenta\Formular\bin\Debug\Formular.pdb
+C:\Users\Iordache Razvan\Documents\Visual Studio 2015\Projects\Licenta\Formular\obj\Debug\Formular.csprojResolveAssemblyReference.cache
+C:\Users\Iordache Razvan\Documents\Visual Studio 2015\Projects\Licenta\Formular\obj\Debug\Formular.Form1.resources
+C:\Users\Iordache Razvan\Documents\Visual Studio 2015\Projects\Licenta\Formular\obj\Debug\Formular.Properties.Resources.resources
+C:\Users\Iordache Razvan\Documents\Visual Studio 2015\Projects\Licenta\Formular\obj\Debug\Formular.csproj.GenerateResource.Cache
+C:\Users\Iordache Razvan\Documents\Visual Studio 2015\Projects\Licenta\Formular\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Iordache Razvan\Documents\Visual Studio 2015\Projects\Licenta\Formular\bin\Debug\Newtonsoft.Json.xml
