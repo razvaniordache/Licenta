@@ -1,7 +1,9 @@
 ﻿
+using System;
+
 namespace Formular.Models
 {
-    public class Product
+    public class Product : ICloneable
     {
         public string Name { get; set; }
         public int Quantity { get; set; }
@@ -19,6 +21,13 @@ namespace Formular.Models
         public override string ToString()
         {
             return string.Format("{0}x{1} {2}", Name, Quantity, UnitOfMeasure);
+        }
+
+        public object Clone()
+        {
+            Product newProduct = (Product)this.MemberwiseClone();
+
+            return newProduct;
         }
     }
 }

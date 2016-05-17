@@ -161,7 +161,7 @@ namespace Formular
                                 listView1.Items.Add(item);
                             }
                         }
-                        else
+                        else 
                         {
                             richTextBox1.Text = "Cantitate insuficienta de "+resp;
                             int WishListQuantity = prod.Quantity - int.Parse(textBox3.Text);
@@ -177,9 +177,32 @@ namespace Formular
                             DialogResult dialogResult = MessageBox.Show("Would you like to add"+prod.Name+" to Wish List ?","No more " +prod.Name, MessageBoxButtons.YesNo);
                             if (dialogResult == DialogResult.Yes)
                             {
-                                wishList.Add(prod);
-                                item = new ListViewItem(new string[] { prod.Name, (WishListQuantity).ToString() });
-                                listView2.Items.Add(item);
+                                bool existInWishList = false;
+                                ListViewItem itemL2;
+
+                                foreach (Models.Product WishProd in wishList)
+                                {
+                                    if(WishProd.Name.Equals(resp))
+                                    {
+                                        WishProd.Quantity = WishProd.Quantity + int.Parse(textBox3.Text);
+                                        existInWishList = true;
+                                    }
+                                }
+
+                                if(existInWishList == false)
+                                {
+                                    Models.Product NewWish = (Models.Product)prod.Clone();
+                                    NewWish.Quantity = WishListQuantity;
+                                    wishList.Add(NewWish);
+                                }
+
+                                listView2.Items.Clear();
+                                foreach (Models.Product wishProd in wishList)
+                                {
+                                    itemL2 = new ListViewItem(new string[] { wishProd.Name, wishProd.Quantity.ToString() });
+                                    listView2.Items.Add(itemL2);
+                                }
+
                             }
                             else
                             {
@@ -206,6 +229,17 @@ namespace Formular
         private void label5_Click(object sender, EventArgs e)
         {
            
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            listView2.Items.Clear();
+            wishList.Clear();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //Create Text doc. and Print
         }
     }
 }

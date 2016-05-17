@@ -55,10 +55,12 @@
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.label8 = new System.Windows.Forms.Label();
             this.listView2 = new System.Windows.Forms.ListView();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -274,10 +276,20 @@
             this.listView2.GridLines = true;
             this.listView2.Location = new System.Drawing.Point(578, 355);
             this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(393, 107);
+            this.listView2.Size = new System.Drawing.Size(311, 107);
             this.listView2.TabIndex = 20;
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Product Name";
+            this.columnHeader4.Width = 179;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Quantity";
+            this.columnHeader5.Width = 127;
             // 
             // label10
             // 
@@ -299,21 +311,33 @@
             this.label9.TabIndex = 23;
             this.label9.Text = "Statistics";
             // 
-            // columnHeader4
+            // button3
             // 
-            this.columnHeader4.Text = "Product Name";
-            this.columnHeader4.Width = 261;
+            this.button3.Location = new System.Drawing.Point(896, 427);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 34);
+            this.button3.TabIndex = 24;
+            this.button3.Text = "Clear Wishlist";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // columnHeader5
+            // button4
             // 
-            this.columnHeader5.Text = "Quantity";
-            this.columnHeader5.Width = 127;
+            this.button4.Location = new System.Drawing.Point(895, 398);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 25;
+            this.button4.Text = "Print";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(983, 479);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.listView2);
@@ -374,6 +398,8 @@
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
     }
 }
 
