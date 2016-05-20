@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -59,8 +60,8 @@ namespace Formular
 
 
             string resp = frigider.checkProdus(textBoxCod.Text).ToString();
-           
-      
+
+
 
             ListViewItem item;
             bool exists = false;
@@ -96,11 +97,11 @@ namespace Formular
                         {
                             Debug.WriteLine(ex.Message);
                         }
-                        
+
                     }
                 }
                 //New product in the list
-                if (!exists && textBox1.Text.Length != 0 && float.Parse(textBox1.Text)>1 && comboBox1.SelectedIndex>-1)
+                if (!exists && textBox1.Text.Length != 0 && float.Parse(textBox1.Text) > 1 && comboBox1.SelectedIndex > -1)
                 {
                     Models.Product produsNou = new Models.Product(resp, int.Parse(textBox1.Text), comboBox1.Text);
                     availableProducts.Add(produsNou);
@@ -116,9 +117,9 @@ namespace Formular
                         Debug.WriteLine(ex.Message);
                     }
                 }
-                else if (textBox1.Text.Length == 0 || float.Parse(textBox1.Text) < 1 || comboBox1.Text.Length==0)
+                else if (textBox1.Text.Length == 0 || float.Parse(textBox1.Text) < 1 || comboBox1.Text.Length == 0)
                 {
-                    richTextBox1.Text = "Nu ati indeplinit una din conditii"+Environment.NewLine+"-Nu ati completat unul din campuri"
+                    richTextBox1.Text = "Nu ati indeplinit una din conditii" + Environment.NewLine + "-Nu ati completat unul din campuri"
                                             + Environment.NewLine + "-Cantitatea trebuie sa fie supraunitara";
                 }
             }
@@ -129,8 +130,8 @@ namespace Formular
             }
             foreach (Models.Product prod in availableProducts)
             {
-                
-                this.chart1.Series["Quantity"].Points.AddXY(prod.Name,prod.Quantity);
+
+                this.chart1.Series["Quantity"].Points.AddXY(prod.Name, prod.Quantity);
             }
         }
 
@@ -148,7 +149,7 @@ namespace Formular
                 textBox4.Text = resp;
                 foreach (Models.Product prod in availableProducts)
                 {
-                    if (prod.Name.Equals(resp) && float.Parse(textBox3.Text)>1 )
+                    if (prod.Name.Equals(resp) && float.Parse(textBox3.Text) > 1)
                     {
                         textBox4.Text = resp;
                         if (prod.DefaultQuantity < prod.Quantity - int.Parse(textBox3.Text))
@@ -161,9 +162,9 @@ namespace Formular
                                 listView1.Items.Add(item);
                             }
                         }
-                        else 
+                        else
                         {
-                            richTextBox1.Text = "Cantitate insuficienta de "+resp;
+                            richTextBox1.Text = "Cantitate insuficienta de " + resp;
                             int WishListQuantity = prod.Quantity - int.Parse(textBox3.Text);
                             WishListQuantity = WishListQuantity * (-1);
                             prod.Quantity = prod.DefaultQuantity;
@@ -174,7 +175,7 @@ namespace Formular
                                 listView1.Items.Add(item);
                             }
 
-                            DialogResult dialogResult = MessageBox.Show("Would you like to add"+prod.Name+" to Wish List ?","No more " +prod.Name, MessageBoxButtons.YesNo);
+                            DialogResult dialogResult = MessageBox.Show("Would you like to add" + prod.Name + " to Wish List ?", "No more " + prod.Name, MessageBoxButtons.YesNo);
                             if (dialogResult == DialogResult.Yes)
                             {
                                 bool existInWishList = false;
@@ -182,14 +183,14 @@ namespace Formular
 
                                 foreach (Models.Product WishProd in wishList)
                                 {
-                                    if(WishProd.Name.Equals(resp))
+                                    if (WishProd.Name.Equals(resp))
                                     {
                                         WishProd.Quantity = WishProd.Quantity + int.Parse(textBox3.Text);
                                         existInWishList = true;
                                     }
                                 }
 
-                                if(existInWishList == false)
+                                if (existInWishList == false)
                                 {
                                     Models.Product NewWish = (Models.Product)prod.Clone();
                                     NewWish.Quantity = WishListQuantity;
@@ -209,10 +210,10 @@ namespace Formular
                                 richTextBox1.Text = " Se lanseaza cautarea online ... ";
                                 frigider.LaunchOnlineCommand(resp);
                             }
-                            
+
                         }
                     }
-                } 
+                }
             }
 
             foreach (var series in chart1.Series)
@@ -228,7 +229,7 @@ namespace Formular
 
         private void label5_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -239,7 +240,39 @@ namespace Formular
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //Create Text doc. and Print
+            DateTime localDate = DateTime.Today;
+            try
+            {
+
+                using (System.IO.StreamWriter tw = File.CreateText(@"C:\Users\Iordache Razvan\Documents\Visual Studio 2015\Projects\Licenta\WishList\List " + localDate.ToString("D")+ ".txt"))
+                {
+                    tw.WriteLine("Produs,Quantity,");
+                    foreach (ListViewItem item in listView2.Items)
+                    {
+
+                        foreach (ListViewItem.ListViewSubItem listViewSubItem in item.SubItems)
+                        {
+                            tw.Write(listViewSubItem.Text + ",");
+                        }
+                        tw.WriteLine();
+                    }
+                }
+                DialogResult dialogResult = MessageBox.Show("Print List " + localDate.ToString("D")+ ".txt","Print Confirmation" , MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    ProcessStartInfo psi = new ProcessStartInfo(@"C:\Users\Iordache Razvan\Documents\Visual Studio 2015\Projects\Licenta\WishList\List " + localDate.ToString("D") + ".txt");
+                    psi.Verb = "PRINT";
+
+                    Process.Start(psi);
+                }
+            }
+            catch
+            {
+                MessageBox.Show("TEXT FILE NOT FOUND");
+            }
+
         }
+
+  
     }
 }
