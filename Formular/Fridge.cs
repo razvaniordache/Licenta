@@ -43,7 +43,7 @@ namespace Formular
             BDProduseDataSetTableAdapters.ProduseTableAdapter produse = new BDProduseDataSetTableAdapters.ProduseTableAdapter();
             BDProduseDataSet.ProduseDataTable dt = produse.GetDataByCod(cod);
 
-            if(dt.Rows.Count>0)
+            if (dt.Rows.Count>0)
             {
                 return dt.Rows[0][2].ToString();
                
