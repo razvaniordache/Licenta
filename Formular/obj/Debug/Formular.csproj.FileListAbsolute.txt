@@ -32,3 +32,6 @@ C:\Users\Iordache Razvan\Documents\Visual Studio 2015\Projects\Licenta\Formular\
 C:\Users\Iordache Razvan\Documents\Visual Studio 2015\Projects\Licenta\Formular\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Iordache Razvan\Documents\Visual Studio 2015\Projects\Licenta\Formular\obj\Debug\Formular.LogIn.resources
 C:\Users\Iordache Razvan\Documents\Visual Studio 2015\Projects\Licenta\Formular\bin\Debug\BDUtilizatori.accdb
+C:\Users\Iordache Razvan\Documents\Visual Studio 2015\Projects\Licenta\Formular\bin\Debug\RestSharp.dll
+C:\Users\Iordache Razvan\Documents\Visual Studio 2015\Projects\Licenta\Formular\bin\Debug\RestSharp.xml
+C:\Users\Iordache Razvan\Documents\Visual Studio 2015\Projects\Licenta\Formular\bin\Debug\settings.txt

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Formular.Notifications;
+using Formular.Notifications.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,7 +26,7 @@ namespace Formular
             InitializeComponent();
             Fridge frigider = new Fridge();
 
-
+            //Produse Default din frigider
             ListViewItem lvi = new ListViewItem("Lapte Zuzu");
             Models.Product lapteZuzu = new Models.Product("Lapte Zuzu", 1000, "ml");
             availableProducts.Add(lapteZuzu);
@@ -38,6 +40,20 @@ namespace Formular
             lvi2.SubItems.Add("grams");
             listView1.Items.Add(lvi);
             listView1.Items.Add(lvi2);
+
+            ListViewItem lvi3 = new ListViewItem("Unt Jager");
+            Models.Product Unt = new Models.Product("Unt Jager", 400, "grams");
+            availableProducts.Add(Unt);
+            lvi3.SubItems.Add("400");
+            lvi3.SubItems.Add("grams");
+            listView1.Items.Add(lvi3);
+
+            ListViewItem lvi4 = new ListViewItem("Delaco Branza Verdeata");
+            Models.Product Delaco = new Models.Product("Delaco Branza Verdeata", 300, "grams");
+            availableProducts.Add(Delaco);
+            lvi4.SubItems.Add("300");
+            lvi4.SubItems.Add("grams");
+            listView1.Items.Add(lvi4);
 
             foreach (var series in chart1.Series)
             {
@@ -149,7 +165,7 @@ namespace Formular
                 textBox4.Text = resp;
                 foreach (Models.Product prod in availableProducts)
                 {
-                    if (prod.Name.Equals(resp) && float.Parse(textBox3.Text) > 1)
+                    if (prod.Name.Equals(resp) && textBox3.Text.Length>0 && float.Parse(textBox3.Text) > 1)
                     {
                         textBox4.Text = resp;
                         if (prod.DefaultQuantity < prod.Quantity - int.Parse(textBox3.Text))
@@ -165,6 +181,14 @@ namespace Formular
                         else
                         {
                             richTextBox1.Text = "Cantitate insuficienta de " + resp;
+                            DateTime localDate = DateTime.Now;
+                            new PushBullet().SendNotification(new Notifications.Models.Notification()
+                            {
+                                Title = "Run out of " + resp,
+                                Body = "Run out of "+resp+" at "+localDate.ToString(),
+                                Type = PushBulletTypes.Note.ToString().ToLower()
+                            });
+
                             int WishListQuantity = prod.Quantity - int.Parse(textBox3.Text);
                             WishListQuantity = WishListQuantity * (-1);
                             prod.Quantity = prod.DefaultQuantity;
@@ -175,7 +199,7 @@ namespace Formular
                                 listView1.Items.Add(item);
                             }
 
-                            DialogResult dialogResult = MessageBox.Show("Would you like to add" + prod.Name + " to Wish List ?", "No more " + prod.Name, MessageBoxButtons.YesNo);
+                            DialogResult dialogResult = MessageBox.Show("Would you like to add " + prod.Name + " to Wish List ?", "Insufficient  " + prod.Name, MessageBoxButtons.YesNo);
                             if (dialogResult == DialogResult.Yes)
                             {
                                 bool existInWishList = false;
@@ -273,6 +297,18 @@ namespace Formular
 
         }
 
-  
+        private void button5_Click(object sender, EventArgs e)
+        {
+            DateTime localDate = DateTime.Today;
+            string WishListNotification = System.IO.File.ReadAllText(@"C:\Users\Iordache Razvan\Documents\Visual Studio 2015\Projects\Licenta\WishList\List " + localDate.ToString("D") + ".txt");
+
+            new PushBullet().SendNotification(new Notifications.Models.Notification()
+            {
+                Title = "Wish List",
+                Body = WishListNotification,
+                Type = PushBulletTypes.Note.ToString().ToLower(),
+                
+            });
+        }
     }
 }

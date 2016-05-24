@@ -36,6 +36,10 @@
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net45\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
@@ -63,6 +67,7 @@
       <DependentUpon>BDUtilizatoriDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Fridge.cs" />
+    <Compile Include="Helpers\SettingsManager.cs" />
     <Compile Include="LogIn.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,6 +81,11 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Notifications\Enums\PushBulletTypes.cs" />
+    <Compile Include="Notifications\Interfaces\INotification.cs" />
+    <Compile Include="Notifications\Models\Notification.cs" />
+    <Compile Include="Notifications\PushBullet.cs" />
+    <Compile Include="Notifications\Serializers\CamelCaseSerializer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataSources\Products.cs" />
@@ -139,6 +149,9 @@
     </Content>
     <Content Include="BDUtilizatori.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="settings.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

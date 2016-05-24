@@ -1,0 +1,4 @@
+Produs,Quantity,
+Red Bull,950,
+Branza Kiri,100,
+Lapte Zuzu,350,
