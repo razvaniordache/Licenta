@@ -9,6 +9,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -64,9 +65,13 @@ namespace Formular
 
                 this.chart1.Series["Quantity"].Points.AddXY(prod.Name, prod.Quantity);
             }
+
+
         }
 
-        private void label7_Click(object sender, EventArgs e)
+       
+
+    private void label7_Click(object sender, EventArgs e)
         {
 
         }
@@ -268,7 +273,7 @@ namespace Formular
             try
             {
 
-                using (System.IO.StreamWriter tw = File.CreateText(@"C:\Users\Iordache Razvan\Documents\Visual Studio 2015\Projects\Licenta\WishList\List " + localDate.ToString("D")+ ".txt"))
+                using (System.IO.StreamWriter tw = File.CreateText(@"C:\Users\Iordache Razvan\Documents\Visual Studio 2015\Projects\Licenta\WishList\List " + localDate.ToString("D") + ".txt"))
                 {
                     tw.WriteLine("Produs,Quantity,");
                     foreach (ListViewItem item in listView2.Items)
@@ -300,6 +305,28 @@ namespace Formular
         private void button5_Click(object sender, EventArgs e)
         {
             DateTime localDate = DateTime.Today;
+            try
+            {
+
+                using (System.IO.StreamWriter tw = File.CreateText(@"C:\Users\Iordache Razvan\Documents\Visual Studio 2015\Projects\Licenta\WishList\List " + localDate.ToString("D") + ".txt"))
+                {
+                    tw.WriteLine("Produs,Quantity,");
+                    foreach (ListViewItem item in listView2.Items)
+                    {
+
+                        foreach (ListViewItem.ListViewSubItem listViewSubItem in item.SubItems)
+                        {
+                            tw.Write(listViewSubItem.Text + ",");
+                        }
+                        tw.WriteLine();
+                    }
+                }
+            }
+            catch
+            {
+                MessageBox.Show("TEXT FILE NOT FOUND");
+            }
+
             string WishListNotification = System.IO.File.ReadAllText(@"C:\Users\Iordache Razvan\Documents\Visual Studio 2015\Projects\Licenta\WishList\List " + localDate.ToString("D") + ".txt");
 
             new PushBullet().SendNotification(new Notifications.Models.Notification()
@@ -309,6 +336,22 @@ namespace Formular
                 Type = PushBulletTypes.Note.ToString().ToLower(),
                 
             });
+        }
+
+        private void removeFromListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            availableProducts.RemoveAt(listView1.SelectedItems[0].Index);
+            foreach (var series in chart1.Series)
+            {
+                series.Points.Clear();
+            }
+            foreach (Models.Product prod in availableProducts)
+            {
+
+                this.chart1.Series["Quantity"].Points.AddXY(prod.Name, prod.Quantity);
+            }
+            listView1.Items.Remove(listView1.SelectedItems[0]);
+            
         }
     }
 }

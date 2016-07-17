@@ -1,0 +1,2 @@
+Produs,Quantity,
+Coca Cola,1200,
